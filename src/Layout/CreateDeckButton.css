@@ -1,0 +1,15 @@
+.button {
+  display: flex;
+  align-items: center;
+}
+
+.create-deck-container {
+  display: flex;  
+  align-items: center;
+  cursor: pointer;
+}
+
+.plus-sign {
+  font-size: 30px;
+  margin-right: 5px; 
+}
