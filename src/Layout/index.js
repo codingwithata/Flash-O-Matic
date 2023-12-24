@@ -14,6 +14,7 @@ function Layout() {
         <Switch>
           <Route exact path="/">
             <CreateDeckButton />
+            <br></br>
             <Decks />
           </Route>
           <Route path="/decks/new">

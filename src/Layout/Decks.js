@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { listDecks } from "../utils/api/index"; // Adjust the path accordingly
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import './Decks.css';
 
 function Decks() {
   const [decks, setDecks] = useState([]);
@@ -6,29 +10,48 @@ function Decks() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/data/db.json");
-        const jsonData = await response.json();
-        setDecks(jsonData.decks);
-        console.log(jsonData)
+        const decksData = await listDecks();
+        setDecks(decksData || []); // Ensure decksData is an array or default to an empty array
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching decks:", error);
       }
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
   return (
     <div>
-      <h2>Deck List:</h2>
-      <ul>
+      <div className="card-container">
         {decks.map((deck) => (
-          <li key={deck.id}>
-            <h3>{deck.name}</h3>
-            <p>{deck.description}</p>
-          </li>
+          <Card key={deck.id} className="mb-4">
+            <Card.Body>
+              <Card.Title>{deck.name}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">Deck ID: {deck.id}</Card.Subtitle>
+              <Card.Text>{deck.description}</Card.Text>
+
+              {/* Button Container */}
+              <div className="button-container">
+                <div className="button-group">
+                  {/* View and Study Buttons */}
+                  <Button variant="primary" className="mr-2">
+                    View
+                  </Button>
+                  <Button variant="success">
+                    Study
+                  </Button>
+                </div>
+
+                {/* Trash Button */}
+                <Button variant="danger">
+                  Delete
+                  <i className="fas fa-trash-alt"></i> {/* Icon here */}
+                </Button>
+              </div>
+            </Card.Body>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
