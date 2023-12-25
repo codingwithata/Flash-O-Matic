@@ -3,6 +3,7 @@ import { listDecks } from "../utils/api/index"; // Adjust the path accordingly
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './Decks.css';
+import { deleteDeck } from "../utils/api/index"; // Adjust the path accordingly
 
 function Decks() {
   const [decks, setDecks] = useState([]);
@@ -19,6 +20,19 @@ function Decks() {
 
     fetchData();
   }, []);
+
+  const handleDeleteDeck = async (deckId) => {
+    try {
+      // Call deleteDeck function to delete the deck
+      await deleteDeck(deckId);
+
+      // Update the state to remove the deleted deck
+      setDecks((prevDecks) => prevDecks.filter((deck) => deck.id !== deckId));
+    } catch (error) {
+      console.error("Error deleting deck:", error);
+    }
+  };
+
 
   return (
     <div>
@@ -43,7 +57,7 @@ function Decks() {
                 </div>
 
                 {/* Trash Button */}
-                <Button variant="danger">
+                <Button variant="danger" onClick={() => handleDeleteDeck(deck.id)}>
                   Delete
                   <i className="fas fa-trash-alt"></i> {/* Icon here */}
                 </Button>
