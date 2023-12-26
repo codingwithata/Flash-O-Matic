@@ -16,22 +16,22 @@ function ViewDeck() {
       try {
         const deckData = await readDeck(deckId);
         setDecks(deckData || []);
+        setCards(deckData.cards || [])
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
     };
 
-    const fetchCards = async () => {
-        try{
-            const cardData = await listCards(deckId);
-            setCards(cardData || [])
-            console.log(cardData)
-        } catch (error) {
-                console.error("Error fetching decks:", error);
-        }
-    };
+    // const fetchCards = async () => {
+    //     try{
+    //         const cardData = await listCards(deckId);
+    //         setCards(cardData || [])
+    //         console.log(cardData)
+    //     } catch (error) {
+    //             console.error("Error fetching decks:", error);
+    //     }
+    // };
 
-    fetchCards()
     fetchData();
   }, [deckId]);
 
@@ -46,6 +46,18 @@ function ViewDeck() {
               <Card.Text>{decks.description}</Card.Text>
             </Card.Body>
           </Card>
+          
+          <Card key={cards.id} className="mb-4">
+            {cards.map((card) => (
+              <Card.Body key={card.id}>
+                <Card.Title>{card.name}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Deck ID: {card.id}</Card.Subtitle>
+                <Card.Text>Front: {card.front}</Card.Text>
+                <Card.Text>Back: {card.back}</Card.Text>
+              </Card.Body>
+            ))}
+          </Card>
+
           <div className="button-container">
           <Link to={`/decks/${deckId}/edit`} className="button-link">
           <Button variant="secondary" size="lg" className="button">
@@ -54,9 +66,12 @@ function ViewDeck() {
           </Link>
           <Button type="submit" variant="primary" className="submit-button">
             Study
-          </Button><Button type="submit" variant="primary" className="submit-button">
-            Add cards
+            </Button>
+            <Link to={`/decks/${deckId}/cards`} className="button-link">
+          <Button variant="secondary" size="lg" className="button">
+            Add Cards
           </Button>
+          </Link>
         </div>
       </div>
     </div>

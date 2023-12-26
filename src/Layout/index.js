@@ -8,7 +8,7 @@ import CreateDeck from "./CreateDeck";
 import Decks from "./Decks";
 import ViewDeck from "./ViewDeck";
 import EditDeck from "./EditDeck"
-
+import CreateCard from "./CreateCard"
 function Layout() {
   return (
     <>
@@ -28,6 +28,9 @@ function Layout() {
           </Route>
           <Route path="/decks/:deckId/edit">
             <EditDeck />
+          </Route>
+          <Route path="/decks/:deckId/cards">
+            <CreateCard />
           </Route>
           <Route>
             <NotFound />

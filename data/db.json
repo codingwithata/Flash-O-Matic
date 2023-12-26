@@ -2,14 +2,44 @@
   "decks": [
     {
       "id": 2,
-      "name": "This is a new deck",
-      "description": "This is a new deck"
+      "name": "",
+      "description": ""
     },
     {
-      "name": "Math",
-      "description": "This is a math deck to study",
-      "id": 4
+      "id": 4,
+      "name": "English",
+      "description": "This is an English cards"
+    },
+    {
+      "name": "English",
+      "description": "Cards",
+      "id": 5
     }
   ],
-  "cards": []
+  "cards": [
+    {
+      "front": "fds",
+      "back": "af",
+      "deckId": 2,
+      "id": 1
+    },
+    {
+      "front": "one",
+      "back": "one",
+      "deckId": 4,
+      "id": 2
+    },
+    {
+      "front": "one",
+      "back": "one",
+      "deckId": 4,
+      "id": 3
+    },
+    {
+      "front": "Two",
+      "back": "Two",
+      "deckId": 4,
+      "id": 4
+    }
+  ]
 }
