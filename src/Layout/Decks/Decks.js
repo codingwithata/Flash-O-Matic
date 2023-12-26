@@ -6,6 +6,7 @@ import "./Decks.css";
 import { deleteDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Decks() {
   const [decks, setDecks] = useState([]);
@@ -68,7 +69,9 @@ function Decks() {
                   >
                     View
                   </Button>
-                  <Button variant="success">Study</Button>
+                  <Link to={`/decks/${deck.id}/study`} className="button-link">
+                    <Button variant="success">Study</Button>
+                  </Link>
                 </div>
 
                 {/* Trash Button */}

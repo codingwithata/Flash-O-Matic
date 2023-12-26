@@ -12,6 +12,18 @@
       "back": "new",
       "deckId": 1,
       "id": 4
+    },
+    {
+      "front": "English",
+      "back": "New",
+      "deckId": 1,
+      "id": 5
+    },
+    {
+      "front": "Math",
+      "back": "New",
+      "deckId": 1,
+      "id": 6
     }
   ]
 }
