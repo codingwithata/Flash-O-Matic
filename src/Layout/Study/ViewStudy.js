@@ -5,6 +5,7 @@ import { readDeck, deleteCard } from "../../utils/api/index";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ViewStudy() {
   const { deckId } = useParams();
@@ -49,34 +50,48 @@ function ViewStudy() {
         <Breadcrumb.Item active>Study deck {deckId}</Breadcrumb.Item>
       </Breadcrumb>
 
-      <Card key={currentCard.id} className="mb-4">
-        <Card.Body>
-          <Card.Title>{currentCard.name}</Card.Title>
-          <Card.Text>
-            {showFront
-              ? `Front: ${currentCard.front}`
-              : `Back: ${currentCard.back}`}
-          </Card.Text>
-          <div className="button-container">
-            <Button
-              onClick={handleFlip}
-              variant="secondary"
-              size="lg"
-              className="button"
-            >
-              Flip
-            </Button>
-            <Button
-              onClick={handleNext}
-              type="submit"
-              variant="primary"
-              className="submit-button"
-            >
-              Next
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+      {cards.length > 2 ? (
+        <Card key={currentCard.id} className="mb-4">
+          <Card.Body>
+            <Card.Title>{currentCard.name}</Card.Title>
+            <Card.Text>
+              {showFront
+                ? `Front: ${currentCard.front}`
+                : `Back: ${currentCard.back}`}
+            </Card.Text>
+            <div className="button-container">
+              <Button
+                onClick={handleFlip}
+                variant="secondary"
+                size="lg"
+                className="button"
+              >
+                Flip
+              </Button>
+              <Button
+                onClick={handleNext}
+                type="submit"
+                variant="primary"
+                className="submit-button"
+              >
+                Next
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      ) : (
+        <div>
+          <h1>React Router: Study</h1>
+          <h2>Not enough cards.</h2>
+          <p>
+            You need at least 3 cards to study. There are {cards.length} in this
+            deck{" "}
+          </p>
+          <Link to={`/decks/${deckId}/cards`}>
+            <Button>Add Cards</Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
