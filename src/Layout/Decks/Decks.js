@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { listDecks } from "../utils/api/index"; // Adjust the path accordingly
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import './Decks.css';
-import { deleteDeck } from "../utils/api/index"; // Adjust the path accordingly
+import { listDecks } from "../../utils/api/index"; // Adjust the path accordingly
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import "./Decks.css";
+import { deleteDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory } from "react-router-dom";
 
 function Decks() {
@@ -23,21 +23,20 @@ function Decks() {
     fetchData();
   }, []);
 
- const handleDeleteDeck = async (deck) => {
-  try{
-    await deleteDeck(deck)
+  const handleDeleteDeck = async (deck) => {
+    try {
+      await deleteDeck(deck);
 
-    setDecks((prevDecks) => prevDecks.filter((deck) => deck.id != deck.id))
-  } catch (error) {
-    console.error("Error deleting deck:", error);
-  }
-};
+      setDecks((prevDecks) => prevDecks.filter((deck) => deck.id != deck.id));
+    } catch (error) {
+      console.error("Error deleting deck:", error);
+    }
+  };
 
-const handleViewDeck = async (deckToView) => {
-  
-  console.log(deckToView.id)
-  history.push(`/decks/${deckToView.id}`);
-};
+  const handleViewDeck = async (deckToView) => {
+    console.log(deckToView.id);
+    history.push(`/decks/${deckToView.id}`);
+  };
 
   return (
     <div>
@@ -46,23 +45,30 @@ const handleViewDeck = async (deckToView) => {
           <Card key={deck.id} className="mb-4">
             <Card.Body>
               <Card.Title>{deck.name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Deck ID: {deck.id}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">
+                Deck ID: {deck.id}
+              </Card.Subtitle>
               <Card.Text>{deck.description}</Card.Text>
 
               {/* Button Container */}
               <div className="button-container">
                 <div className="button-group">
                   {/* View and Study Buttons */}
-                  <Button variant="primary" className="mr-2" onClick={() => handleViewDeck(deck)}>
+                  <Button
+                    variant="primary"
+                    className="mr-2"
+                    onClick={() => handleViewDeck(deck)}
+                  >
                     View
                   </Button>
-                  <Button variant="success">
-                    Study
-                  </Button>
+                  <Button variant="success">Study</Button>
                 </div>
 
                 {/* Trash Button */}
-                <Button variant="danger" onClick={() => handleDeleteDeck(deck.id)}>
+                <Button
+                  variant="danger"
+                  onClick={() => handleDeleteDeck(deck.id)}
+                >
                   Delete
                   <i className="fas fa-trash-alt"></i> {/* Icon here */}
                 </Button>

@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { Button, Form } from 'react-bootstrap';
-import { createDeck } from "../utils/api/index"; // Adjust the path accordingly
-import { API_BASE_URL, stripCards, fetchJson } from "../utils/api/index"; // Import API-related functions
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { readDeck, updateDeck } from "../../utils/api/index"; // Adjust the path accordingly
+import { API_BASE_URL, stripCards, fetchJson } from "../../utils/api/index"; // Import API-related functions
+import { useParams, useHistory } from "react-router-dom";
 
-import './CreateDeck.css';
+import "./CreateDeck.css";
 
-function CreateDeck() {
+function EditDeck() {
+  const [deck, setDeck] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const history = useHistory(); 
+
+  const history = useHistory();
+
+  const { deckId } = useParams();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -20,24 +24,38 @@ function CreateDeck() {
   };
 
   const handleOnSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     try {
       const newDeck = {
+        id: deckId,
         name,
         description,
       };
 
-      await createDeck(newDeck);
-      history.push('/');
-     
+      await updateDeck(newDeck);
+
+      history.push("/");
+
       setName("");
       setDescription("");
-      
     } catch (error) {
       console.error("Error creating deck:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const deck = await readDeck(deckId);
+        setDeck(deck || []);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [deckId, setDeck]);
 
   return (
     <div className="create-deck-container">
@@ -47,7 +65,7 @@ function CreateDeck() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter name"
+            placeholder={deck.name}
             value={name}
             onChange={handleNameChange}
           />
@@ -57,7 +75,7 @@ function CreateDeck() {
           <Form.Control
             as="textarea"
             rows={3}
-            placeholder="Enter description"
+            placeholder={deck.description}
             value={description}
             onChange={handleDescriptionChange}
           />
@@ -75,4 +93,4 @@ function CreateDeck() {
   );
 }
 
-export default CreateDeck;
+export default EditDeck;

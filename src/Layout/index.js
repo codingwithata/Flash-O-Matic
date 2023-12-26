@@ -3,12 +3,12 @@ import React from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
-import CreateDeckButton from "./CreateDeckButton";
-import CreateDeck from "./CreateDeck";
-import Decks from "./Decks";
-import ViewDeck from "./ViewDeck";
-import EditDeck from "./EditDeck"
-import CreateCard from "./CreateCard"
+import CreateDeckButton from "./Decks/CreateDeckButton";
+import CreateDeck from "./Decks/CreateDeck";
+import Decks from "./Decks/Decks";
+import ViewDeck from "./Decks/ViewDeck";
+import EditDeck from "./Decks/EditDeck";
+import CreateCard from "./Cards/CreateCard";
 function Layout() {
   return (
     <>
@@ -30,6 +30,9 @@ function Layout() {
             <EditDeck />
           </Route>
           <Route path="/decks/:deckId/cards">
+            <CreateCard />
+          </Route>
+          <Route path="/decks/:deckId/cards/:cardId/edit">
             <CreateCard />
           </Route>
           <Route>

@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form } from 'react-bootstrap';
-import { readDeck, updateDeck } from "../utils/api/index"; // Adjust the path accordingly
-import { API_BASE_URL, stripCards, fetchJson } from "../utils/api/index"; // Import API-related functions
-import { useParams, useHistory} from 'react-router-dom';
+import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { createDeck } from "../../utils/api/index"; // Adjust the path accordingly
+import { useHistory } from "react-router-dom";
 
-import './CreateDeck.css';
+import "./CreateDeck.css";
 
-function EditDeck() {
-  const [deck, setDeck] = useState([]);
+function CreateDeck() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
-  const history = useHistory()
-  
-  const { deckId } = useParams();
-
+  const history = useHistory();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -25,18 +19,16 @@ function EditDeck() {
   };
 
   const handleOnSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     try {
       const newDeck = {
-        id: deckId,
         name,
         description,
       };
 
-      await updateDeck(newDeck);
-     
-      history.push('/');
+      await createDeck(newDeck);
+      history.push("/");
 
       setName("");
       setDescription("");
@@ -44,19 +36,6 @@ function EditDeck() {
       console.error("Error creating deck:", error);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const deck = await readDeck(deckId);
-        setDeck(deck || []);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    fetchData();
-  }, [deckId, setDeck]); 
 
   return (
     <div className="create-deck-container">
@@ -66,7 +45,7 @@ function EditDeck() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder={deck.name}
+            placeholder="Enter name"
             value={name}
             onChange={handleNameChange}
           />
@@ -76,7 +55,7 @@ function EditDeck() {
           <Form.Control
             as="textarea"
             rows={3}
-            placeholder={deck.description}
+            placeholder="Enter description"
             value={description}
             onChange={handleDescriptionChange}
           />
@@ -94,4 +73,4 @@ function EditDeck() {
   );
 }
 
-export default EditDeck;
+export default CreateDeck;

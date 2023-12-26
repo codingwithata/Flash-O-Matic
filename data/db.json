@@ -2,8 +2,8 @@
   "decks": [
     {
       "id": 2,
-      "name": "",
-      "description": ""
+      "name": "sdfa",
+      "description": "sfda"
     },
     {
       "id": 4,
@@ -40,6 +40,18 @@
       "back": "Two",
       "deckId": 4,
       "id": 4
+    },
+    {
+      "front": "Testing",
+      "back": "Testing",
+      "deckId": 5,
+      "id": 5
+    },
+    {
+      "front": "What is a mountain",
+      "back": "Pile of dirt and rocks",
+      "deckId": 2,
+      "id": 6
     }
   ]
 }

@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Button, Form } from 'react-bootstrap';
-import { createCard } from "../utils/api/index"; // Adjust the path accordingly
-import { useHistory, useParams } from 'react-router-dom';
-
-import './CreateDeck.css';
+import { Button, Form } from "react-bootstrap";
+import { createCard } from "../../utils/api/index"; // Adjust the path accordingly
+import { useHistory, useParams } from "react-router-dom";
 
 function CreateCard() {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
 
-  const history = useHistory(); 
+  const history = useHistory();
 
-  const {deckId} = useParams()
+  const { deckId } = useParams();
 
   const handleFrontChange = (event) => {
     setFront(event.target.value);
@@ -22,7 +20,7 @@ function CreateCard() {
   };
 
   const handleOnSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     try {
       const newCard = {
@@ -31,11 +29,10 @@ function CreateCard() {
       };
 
       await createCard(Number(deckId), newCard); // Convert deckId to a number
-      
-     
+
       setFront("");
       setBack("");
-      
+
       history.push(`/decks/${deckId}`);
     } catch (error) {
       console.error("Error creating deck:", error);
