@@ -1,39 +1,98 @@
-// EditDeck.js
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { readDeck } from "../utils/api/index";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Button, Form } from 'react-bootstrap';
+import { readDeck, updateDeck } from "../utils/api/index"; // Adjust the path accordingly
+import { API_BASE_URL, stripCards, fetchJson } from "../utils/api/index"; // Import API-related functions
+import { useParams, useHistory} from 'react-router-dom';
+
+import './CreateDeck.css';
 
 function EditDeck() {
+  const [deck, setDeck] = useState([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
+  const history = useHistory()
+  
   const { deckId } = useParams();
-  const [decks, setDecks] = useState([]);
+
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleOnSubmit = async (event) => {
+    event.preventDefault(); 
+
+    try {
+      const newDeck = {
+        id: deckId,
+        name,
+        description,
+      };
+
+      await updateDeck(newDeck);
+     
+      history.push('/');
+
+      setName("");
+      setDescription("");
+
+     
+      
+    } catch (error) {
+      console.error("Error creating deck:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const deckData = await readDeck(deckId);
-        setDecks(deckData || []);
-        console.log(deckData);
+        const deck = await readDeck(deckId);
+        setDeck(deck || []);
       } catch (error) {
-        console.error("Error fetching decks:", error);
+        console.error(error);
       }
     };
-
+  
     fetchData();
-  }, [deckId]);
+  }, [deckId, setDeck]); 
 
   return (
-    <div>
-      <div className="card-container">
-          <Card key={decks.id} className="mb-4">
-            <Card.Body>
-              <Card.Title>{decks.name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Deck ID: {decks.id}</Card.Subtitle>
-              <Card.Text>{decks.description}</Card.Text>
-            </Card.Body>
-          </Card>
-      </div>
+    <div className="create-deck-container">
+      <h2>Create Deck</h2>
+      <Form onSubmit={handleOnSubmit}>
+        <Form.Group controlId="formName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder={deck.name}
+            value={name}
+            onChange={handleNameChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="formDescription">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder={deck.description}
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </Form.Group>
+        <div className="button-container">
+          <Button variant="secondary" className="cancel-button">
+            Cancel
+          </Button>
+          <Button type="submit" variant="primary" className="submit-button">
+            Submit
+          </Button>
+        </div>
+      </Form>
     </div>
   );
 }

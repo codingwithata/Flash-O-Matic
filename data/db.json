@@ -6,9 +6,9 @@
       "id": 1
     },
     {
-      "name": "sfda",
-      "description": "sfad",
-      "id": 2
+      "id": 2,
+      "name": "This is a new deck",
+      "description": "This is a new deck"
     },
     {
       "name": "sfd",
