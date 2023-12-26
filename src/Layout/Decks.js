@@ -21,17 +21,15 @@ function Decks() {
     fetchData();
   }, []);
 
-  const handleDeleteDeck = async (deckId) => {
-    try {
-      // Call deleteDeck function to delete the deck
-      await deleteDeck(deckId);
+ const handleDeleteDeck = async (deck) => {
+  try{
+    await deleteDeck(deck)
 
-      // Update the state to remove the deleted deck
-      setDecks((prevDecks) => prevDecks.filter((deck) => deck.id !== deckId));
-    } catch (error) {
-      console.error("Error deleting deck:", error);
-    }
-  };
+    setDecks((prevDecks) => prevDecks.filter((deck) => deck.id != deck.id))
+  } catch (error) {
+    console.error("Error deleting deck:", error);
+  }
+};
 
 
   return (

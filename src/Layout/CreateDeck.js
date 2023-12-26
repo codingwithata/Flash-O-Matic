@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Button, Form } from 'react-bootstrap';
 import { createDeck } from "../utils/api/index"; // Adjust the path accordingly
 import { API_BASE_URL, stripCards, fetchJson } from "../utils/api/index"; // Import API-related functions
+import { useHistory } from 'react-router-dom';
 
 import './CreateDeck.css';
 
 function CreateDeck() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const history = useHistory(); 
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -18,23 +20,20 @@ function CreateDeck() {
   };
 
   const handleOnSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); 
 
     try {
-      // Create a new deck object
       const newDeck = {
         name,
         description,
       };
 
-      // Call the createDeck function to create a new deck
       await createDeck(newDeck);
-
-      // Optionally, you can add logic to handle success, navigate to another page, etc.
-
-      // Clear the form fields after submission
+      history.push('/');
+     
       setName("");
       setDescription("");
+      
     } catch (error) {
       console.error("Error creating deck:", error);
     }
