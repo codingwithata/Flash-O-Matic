@@ -58,9 +58,9 @@ function ViewDeck() {
                 Edit Deck
               </Button>
             </Link>
-            <Button type="submit" variant="primary" className="submit-button">
-              Study
-            </Button>
+            <Link to={`/decks/${deckId}/study`} className="button-link">
+              <Button variant="success">Study</Button>
+            </Link>
             <Link to={`/decks/${deckId}/cards`} className="button-link">
               <Button variant="secondary" size="lg" className="button">
                 Add Cards
