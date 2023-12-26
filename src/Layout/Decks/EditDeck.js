@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { readDeck, updateDeck } from "../../utils/api/index"; // Adjust the path accordingly
-import { API_BASE_URL, stripCards, fetchJson } from "../../utils/api/index"; // Import API-related functions
 import { useParams, useHistory } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import "./CreateDeck.css";
 
@@ -89,9 +89,9 @@ function EditDeck() {
             />
           </Form.Group>
           <div className="button-container">
-            <Button variant="secondary" className="cancel-button">
-              Cancel
-            </Button>
+            <Link to={`/`}>
+              <Button variant="primary">Cancel</Button>
+            </Link>
             <Button type="submit" variant="primary" className="submit-button">
               Submit
             </Button>

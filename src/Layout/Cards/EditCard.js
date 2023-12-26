@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function EditCard() {
   const [front, setFront] = useState("");
@@ -69,9 +70,9 @@ function EditCard() {
             />
           </Form.Group>
           <div className="button-container">
-            <Button variant="secondary" className="cancel-button">
-              Cancel
-            </Button>
+            <Link to={`/decks/${deckId}`}>
+              <Button variant="primary">Cancel</Button>
+            </Link>
             <Button type="submit" variant="primary" className="submit-button">
               Submit
             </Button>

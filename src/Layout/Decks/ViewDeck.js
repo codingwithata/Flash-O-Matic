@@ -87,14 +87,9 @@ function ViewDeck() {
                     Edit Card
                   </Button>
                 </Link>
-                <Button
-                  onClick={() => handleRemoveCard(card)}
-                  type="submit"
-                  variant="primary"
-                  className="submit-button"
-                >
-                  Delete
-                </Button>
+                <Link to={`/`}>
+                  <Button variant="primary">Delete</Button>
+                </Link>
                 <Link
                   to={`/decks/${deckId}/cards`}
                   className="button-link"
