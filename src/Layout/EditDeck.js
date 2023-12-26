@@ -40,9 +40,6 @@ function EditDeck() {
 
       setName("");
       setDescription("");
-
-     
-      
     } catch (error) {
       console.error("Error creating deck:", error);
     }

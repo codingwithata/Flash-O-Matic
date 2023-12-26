@@ -4,9 +4,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './Decks.css';
 import { deleteDeck } from "../utils/api/index"; // Adjust the path accordingly
+import { useHistory } from "react-router-dom";
 
 function Decks() {
   const [decks, setDecks] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +33,11 @@ function Decks() {
   }
 };
 
+const handleViewDeck = async (deckToView) => {
+  
+  console.log(deckToView.id)
+  history.push(`/decks/${deckToView.id}`);
+};
 
   return (
     <div>
@@ -46,7 +53,7 @@ function Decks() {
               <div className="button-container">
                 <div className="button-group">
                   {/* View and Study Buttons */}
-                  <Button variant="primary" className="mr-2">
+                  <Button variant="primary" className="mr-2" onClick={() => handleViewDeck(deck)}>
                     View
                   </Button>
                   <Button variant="success">

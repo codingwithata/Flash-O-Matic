@@ -1,19 +1,14 @@
 {
   "decks": [
     {
-      "name": "dfs",
-      "description": "safd",
-      "id": 1
-    },
-    {
       "id": 2,
       "name": "This is a new deck",
       "description": "This is a new deck"
     },
     {
-      "name": "sfd",
-      "description": "asfd",
-      "id": 3
+      "name": "Math",
+      "description": "This is a math deck to study",
+      "id": 4
     }
   ],
   "cards": []
