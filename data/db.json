@@ -1,57 +1,17 @@
 {
   "decks": [
     {
-      "id": 2,
-      "name": "sdfa",
-      "description": "sfda"
-    },
-    {
-      "id": 4,
       "name": "English",
-      "description": "This is an English cards"
-    },
-    {
-      "name": "English",
-      "description": "Cards",
-      "id": 5
+      "description": "This is an english book",
+      "id": 1
     }
   ],
   "cards": [
     {
-      "front": "fds",
-      "back": "af",
-      "deckId": 2,
-      "id": 1
-    },
-    {
-      "front": "one",
-      "back": "one",
-      "deckId": 4,
-      "id": 2
-    },
-    {
-      "front": "one",
-      "back": "one",
-      "deckId": 4,
-      "id": 3
-    },
-    {
-      "front": "Two",
-      "back": "Two",
-      "deckId": 4,
+      "front": "New ",
+      "back": "new",
+      "deckId": 1,
       "id": 4
-    },
-    {
-      "front": "Testing",
-      "back": "Testing",
-      "deckId": 5,
-      "id": 5
-    },
-    {
-      "front": "What is a mountain",
-      "back": "Pile of dirt and rocks",
-      "deckId": 2,
-      "id": 6
     }
   ]
 }

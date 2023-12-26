@@ -1,10 +1,11 @@
 // EditDeck.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { readDeck, listCards } from "../../utils/api/index";
+import { readDeck, deleteCard } from "../../utils/api/index";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 function ViewDeck() {
   const { deckId } = useParams();
@@ -24,8 +25,24 @@ function ViewDeck() {
     fetchData();
   }, [deckId]);
 
+  const handleRemoveCard = async (selectedCard) => {
+    try {
+      await deleteCard(selectedCard.id);
+      setCards((prevCards) =>
+        prevCards.filter((card) => card.id !== selectedCard.id)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>View Deck {deckId}</Breadcrumb.Item>
+      </Breadcrumb>
+
       <div className="card-container">
         <Card key={decks.id} className="mb-4">
           <Card.Body>
@@ -71,6 +88,7 @@ function ViewDeck() {
                   </Button>
                 </Link>
                 <Button
+                  onClick={() => handleRemoveCard(card)}
                   type="submit"
                   variant="primary"
                   className="submit-button"

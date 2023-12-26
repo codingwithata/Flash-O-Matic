@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import "./Decks.css";
 import { deleteDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory } from "react-router-dom";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 function Decks() {
   const [decks, setDecks] = useState([]);
@@ -23,11 +24,13 @@ function Decks() {
     fetchData();
   }, []);
 
-  const handleDeleteDeck = async (deck) => {
+  const handleDeleteDeck = async (selectDeck) => {
     try {
-      await deleteDeck(deck);
+      await deleteDeck(selectDeck.id);
 
-      setDecks((prevDecks) => prevDecks.filter((deck) => deck.id != deck.id));
+      setDecks((prevDecks) =>
+        prevDecks.filter((deck) => deck.id !== selectDeck.id)
+      );
     } catch (error) {
       console.error("Error deleting deck:", error);
     }
@@ -40,6 +43,10 @@ function Decks() {
 
   return (
     <div>
+      <Breadcrumb>
+        <Breadcrumb.Item active>Home</Breadcrumb.Item>
+      </Breadcrumb>
+
       <div className="card-container">
         {decks.map((deck) => (
           <Card key={deck.id} className="mb-4">
@@ -65,10 +72,7 @@ function Decks() {
                 </div>
 
                 {/* Trash Button */}
-                <Button
-                  variant="danger"
-                  onClick={() => handleDeleteDeck(deck.id)}
-                >
+                <Button variant="danger" onClick={() => handleDeleteDeck(deck)}>
                   Delete
                   <i className="fas fa-trash-alt"></i> {/* Icon here */}
                 </Button>

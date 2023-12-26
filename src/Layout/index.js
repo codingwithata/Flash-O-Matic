@@ -9,6 +9,8 @@ import Decks from "./Decks/Decks";
 import ViewDeck from "./Decks/ViewDeck";
 import EditDeck from "./Decks/EditDeck";
 import CreateCard from "./Cards/CreateCard";
+import EditCard from "./Cards/EditCard";
+
 function Layout() {
   return (
     <>
@@ -26,14 +28,14 @@ function Layout() {
           <Route exact path="/decks/:deckId">
             <ViewDeck />
           </Route>
-          <Route path="/decks/:deckId/edit">
+          <Route exact path="/decks/:deckId/edit">
             <EditDeck />
           </Route>
-          <Route path="/decks/:deckId/cards">
+          <Route exact path="/decks/:deckId/cards">
             <CreateCard />
           </Route>
-          <Route path="/decks/:deckId/cards/:cardId/edit">
-            <CreateCard />
+          <Route exact path="/decks/:deckId/cards/:cardId/edit">
+            <EditCard />
           </Route>
           <Route>
             <NotFound />
