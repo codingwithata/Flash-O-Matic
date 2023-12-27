@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import "./EditCard.css";
 
 function EditCard() {
   const [front, setFront] = useState("");
@@ -41,13 +42,25 @@ function EditCard() {
   };
 
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>View Deck</Breadcrumb.Item>
-        <Breadcrumb.Item active>Edit Card {cardId}</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="create-deck-container">
+    <div className="edit-deck-container">
+      <div className="ec-breadcrumb-main">
+        <Breadcrumb className="breadcrumb">
+          <Breadcrumb.Item href="/" className="breadcrumb-text">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item
+            href={`/decks/${deckId}`}
+            className="breadcrumb-text"
+          >
+            View Deck
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active className="breadcrumb-text">
+            Edit Card {cardId}
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
+
+      <div className="ec-form">
         <h2>Edit Card</h2>
         <Form onSubmit={handleOnSubmit}>
           <Form.Group controlId="formName">
@@ -69,7 +82,7 @@ function EditCard() {
               onChange={handleBackChange}
             />
           </Form.Group>
-          <div className="button-container">
+          <div className="ec-button-container">
             <Link to={`/decks/${deckId}`}>
               <Button variant="primary">Cancel</Button>
             </Link>

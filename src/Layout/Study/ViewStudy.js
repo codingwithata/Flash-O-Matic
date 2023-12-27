@@ -44,54 +44,62 @@ function ViewStudy() {
   const currentCard = cards[cardIndex];
 
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Study deck {deckId}</Breadcrumb.Item>
-      </Breadcrumb>
+    <div className="study-container">
+      <div className="s-breadcrumb-main">
+        <Breadcrumb className="breadcrumb">
+          <Breadcrumb.Item href="/" className="breadcrumb-text">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active className="breadcrumb-text">
+            Study deck {deckId}
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
 
-      {cards.length > 2 ? (
-        <Card key={currentCard.id} className="mb-4">
-          <Card.Body>
-            <Card.Title>{currentCard.name}</Card.Title>
-            <Card.Text>
-              {showFront
-                ? `Front: ${currentCard.front}`
-                : `Back: ${currentCard.back}`}
-            </Card.Text>
-            <div className="button-container">
-              <Button
-                onClick={handleFlip}
-                variant="secondary"
-                size="lg"
-                className="button"
-              >
-                Flip
-              </Button>
-              <Button
-                onClick={handleNext}
-                type="submit"
-                variant="primary"
-                className="submit-button"
-              >
-                Next
-              </Button>
-            </div>
-          </Card.Body>
-        </Card>
-      ) : (
-        <div>
-          <h1>React Router: Study</h1>
-          <h2>Not enough cards.</h2>
-          <p>
-            You need at least 3 cards to study. There are {cards.length} in this
-            deck{" "}
-          </p>
-          <Link to={`/decks/${deckId}/cards`}>
-            <Button>Add Cards</Button>
-          </Link>
-        </div>
-      )}
+      <div className="studyCards">
+        {cards.length > 2 ? (
+          <Card key={currentCard.id} className="mb-4">
+            <Card.Body>
+              <Card.Title>{currentCard.name}</Card.Title>
+              <Card.Text>
+                {showFront
+                  ? `Front: ${currentCard.front}`
+                  : `Back: ${currentCard.back}`}
+              </Card.Text>
+              <div className="button-container">
+                <Button
+                  onClick={handleFlip}
+                  variant="secondary"
+                  size="lg"
+                  className="button"
+                >
+                  Flip
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  type="submit"
+                  variant="primary"
+                  className="submit-button"
+                >
+                  Next
+                </Button>
+              </div>
+            </Card.Body>
+          </Card>
+        ) : (
+          <div>
+            <h1>React Router: Study</h1>
+            <h2>Not enough cards.</h2>
+            <p>
+              You need at least 3 cards to study. There are {cards.length} in
+              this deck{" "}
+            </p>
+            <Link to={`/decks/${deckId}/cards`}>
+              <Button>Add Cards</Button>
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

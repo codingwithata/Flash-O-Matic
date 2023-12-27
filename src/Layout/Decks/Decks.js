@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { listDecks } from "../../utils/api/index"; // Adjust the path accordingly
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import "./Decks.css";
+
 import { deleteDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import CreateDeckButton from "./CreateDeckButton";
+
+import "./Decks.css";
+
 function Decks() {
   const [decks, setDecks] = useState([]);
   const [cards, setCards] = useState(0);

@@ -3,7 +3,6 @@ import React from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
-import CreateDeckButton from "./Decks/CreateDeckButton";
 import CreateDeck from "./Decks/CreateDeck";
 import Decks from "./Decks/Decks";
 import ViewDeck from "./Decks/ViewDeck";

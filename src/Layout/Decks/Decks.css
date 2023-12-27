@@ -1,6 +1,7 @@
 .button-container {
   display: flex;
   justify-content: space-between;
+
   /* or any other value that fits your design */
 }
 
@@ -16,23 +17,18 @@
 
 
 .card-container {
-  width: 75%;
+
   margin: auto;
   justify-content: space-around;
   text-align: center;
 
-  /* Add a border to the card-container */
 }
 
 .card {
   border: 1px solid #ccc;
-  /* Add a border to each card */
   border-radius: 8px;
-  /* Optional: Add border-radius for rounded corners */
   padding: 10px;
-  /* Optional: Add padding for better spacing */
   margin: 10px;
-  /* Optional: Add margin for better spacing */
 }
 
 .name {

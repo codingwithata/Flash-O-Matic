@@ -2,26 +2,22 @@
   "decks": [
     {
       "name": "English",
-      "description": "This is an english book",
+      "description": "This is a new deck",
       "id": 1
-    },
-    {
-      "name": "fdsa",
-      "description": "sdf",
-      "id": 2
-    },
-    {
-      "name": "sadf",
-      "description": "asdf",
-      "id": 3
     }
   ],
   "cards": [
     {
       "front": "fd",
-      "back": "fd",
+      "back": "f",
       "deckId": 1,
       "id": 1
+    },
+    {
+      "front": "",
+      "back": "",
+      "deckId": 1,
+      "id": 2
     }
   ]
 }

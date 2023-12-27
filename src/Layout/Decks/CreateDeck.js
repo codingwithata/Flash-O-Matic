@@ -40,14 +40,23 @@ function CreateDeck() {
   };
 
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item onClick={() => history.push("/")} active>
-          View Deck
-        </Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="create-deck-container">
+    <div className="create-deck-container">
+      <div className="cd-breadcrumb-main">
+        <Breadcrumb className="breadcrumb">
+          <Breadcrumb.Item href="/" className="breadcrumb-text">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item
+            onClick={() => history.push("/")}
+            active
+            className="breadcrumb-text"
+          >
+            View Deck
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
+
+      <div className="cd-form">
         <h2>Create Deck</h2>
         <Form onSubmit={handleOnSubmit}>
           <Form.Group controlId="formName">
@@ -69,7 +78,8 @@ function CreateDeck() {
               onChange={handleDescriptionChange}
             />
           </Form.Group>
-          <div className="button-container">
+
+          <div className="cd-button-container">
             <Link to={`/`}>
               <Button variant="primary">Cancel</Button>
             </Link>

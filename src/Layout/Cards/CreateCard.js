@@ -4,6 +4,8 @@ import { createCard } from "../../utils/api/index"; // Adjust the path according
 import { useHistory, useParams } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
+import "./CreateCard.css";
+
 function CreateCard() {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
@@ -41,13 +43,25 @@ function CreateCard() {
   };
 
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>View Deck</Breadcrumb.Item>
-        <Breadcrumb.Item active>Create Card</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="create-deck-container">
+    <div className="create-card-container">
+      <div className="cc-breadcrumb-main">
+        <Breadcrumb className="breadcrumb">
+          <Breadcrumb.Item href="/" className="breadcrumb-text">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item
+            href={`/decks/${deckId}`}
+            className="breadcrumb-text"
+          >
+            View Deck
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active className="breadcrumb-text">
+            Create Card
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
+
+      <div className="cc-form">
         <h2>Create Card</h2>
         <Form onSubmit={handleOnSubmit}>
           <Form.Group controlId="formName">
@@ -69,7 +83,8 @@ function CreateCard() {
               onChange={handleBackChange}
             />
           </Form.Group>
-          <div className="button-container">
+
+          <div className="cc-button-container">
             <Button variant="secondary" className="cancel-button">
               Cancel
             </Button>

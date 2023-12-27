@@ -5,8 +5,6 @@ import { useParams, useHistory } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-import "./CreateDeck.css";
-
 function EditDeck() {
   const [deck, setDeck] = useState([]);
   const [name, setName] = useState("");
@@ -59,14 +57,25 @@ function EditDeck() {
   }, [deckId, setDeck]);
 
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>View Deck</Breadcrumb.Item>
-        <Breadcrumb.Item active>Edit Deck</Breadcrumb.Item>
-      </Breadcrumb>
+    <div className="edit-deck-container">
+      <div className="ed-breadcrumb-main">
+        <Breadcrumb className="breadcrumb">
+          <Breadcrumb.Item href="/" className="breadcrumb-text">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item
+            href={`/decks/${deckId}`}
+            className="breadcrumb-text"
+          >
+            View Deck
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active className="breadcrumb-text">
+            Edit Deck
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
 
-      <div className="create-deck-container">
+      <div className="ed-form">
         <h2>Create Deck</h2>
         <Form onSubmit={handleOnSubmit}>
           <Form.Group controlId="formName">
@@ -88,7 +97,7 @@ function EditDeck() {
               onChange={handleDescriptionChange}
             />
           </Form.Group>
-          <div className="button-container">
+          <div className="ed-button-container">
             <Link to={`/`}>
               <Button variant="primary">Cancel</Button>
             </Link>
