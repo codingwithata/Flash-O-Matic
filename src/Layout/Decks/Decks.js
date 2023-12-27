@@ -58,23 +58,30 @@ function Decks() {
           <p className="description">{deck.description}</p>
           <div className="button-container">
             <div className="button-group">
-              <Button
-                variant="primary"
-                className="mr-2"
+              <button
+                type="button"
+                className="btn btn-primary mr-2"
                 onClick={() => handleViewDeck(deck)}
               >
                 View
-              </Button>
+              </button>
+
               <Link to={`/decks/${deck.id}/study`} className="button-link">
-                <Button class="btn btn-secondary">Study</Button>
+                <button type="button" className="btn btn-secondary">
+                  Study
+                </button>
               </Link>
             </div>
 
             {/* Trash Button */}
-            <Button variant="danger" onClick={() => handleDeleteDeck(deck)}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => handleDeleteDeck(deck)}
+            >
               Delete
               <i className="fas fa-trash-alt"></i> {/* Icon here */}
-            </Button>
+            </button>
           </div>
         </div>
       ))}

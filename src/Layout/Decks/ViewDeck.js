@@ -2,10 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteCard, deleteDeck } from "../../utils/api/index";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import "./ViewDeck.css";
 
@@ -22,6 +19,7 @@ function ViewDeck() {
         const deckData = await readDeck(deckId);
         setDecks(deckData || []);
         setCards(deckData.cards || []);
+        console.log(deckData.cards);
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
@@ -52,75 +50,83 @@ function ViewDeck() {
   return (
     <div className="view-deck-container">
       <div className="vd-breadcrumb-main">
-        <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item href="/" className="breadcrumb-text">
-            Home
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active className="breadcrumb-text">
-            View Deck {deckId}
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/" className="text-decoration-none">
+                Home
+              </a>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              View Deck {deckId}
+            </li>
+          </ol>
+        </nav>
       </div>
-      <div className="vd-deck-container">
-        <Card key={decks.id} className="mb-4" style={{ border: "none" }}>
-          <Card.Body>
-            <Card.Title>{decks.name}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
+      <div className="vd-deck-container mb-4">
+        <div className="card" style={{ border: "none" }}>
+          <div className="card-body">
+            <h5 className="card-title">{decks.name}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">
               Deck ID: {decks.id}
-            </Card.Subtitle>
-            <Card.Text>{decks.description}</Card.Text>
-          </Card.Body>
+            </h6>
+            <p className="card-text">{decks.description}</p>
+          </div>
 
           <div className="vd-deck-button-container">
-            <Link to={`/decks/${deckId}/edit`} className="button-link">
-              <Button variant="secondary" size="lg" className="button">
-                Edit Deck
-              </Button>
+            <Link
+              to={`/decks/${deckId}/edit`}
+              className="btn btn-secondary btn-lg"
+            >
+              Edit Deck
             </Link>
-            <Link to={`/decks/${deckId}/study`} className="button-link">
-              <Button variant="primary" size="lg">
-                Study
-              </Button>
+            <Link
+              to={`/decks/${deckId}/study`}
+              className="btn btn-primary btn-lg"
+            >
+              Study
             </Link>
-            <Link to={`/decks/${deckId}/cards`} className="button-link">
-              <Button variant="primary" size="lg" className="button">
-                Add Cards
-              </Button>
+            <Link
+              to={`/decks/${deckId}/cards`}
+              className="btn btn-primary btn-lg"
+            >
+              Add Cards
             </Link>
-            <Button variant="danger" onClick={() => handleDeleteDeck(deckId)}>
+            <button onClick={handleDeleteDeck} className="btn btn-danger">
               Delete
-            </Button>
+            </button>
           </div>
-        </Card>
+        </div>
       </div>
 
       <div className="vd-card-container">
-        <h1 style={{ marginLeft: "10px" }}>Cards</h1>
+        <h1 className="ms-3">Cards</h1>
         {cards.map((card) => (
-          <Card key={card.id} className="mb-4">
-            <Card.Body>
-              <Card.Title>{card.name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
+          <div key={card.id} className="card mb-4">
+            <div className="card-body">
+              <h5 className="card-title">{card.name}</h5>
+              <h6 className="card-subtitle mb-2 text-muted">
                 Card ID: {card.id}
-              </Card.Subtitle>
-              <Card.Text>Front: {card.front}</Card.Text>
-              <Card.Text>Back: {card.back}</Card.Text>
+              </h6>
+              <p className="card-text">Front: {card.front}</p>
+              <p className="card-text">Back: {card.back}</p>
 
               <div className="vd-card-button-container">
                 <Link
                   to={`/decks/${deckId}/cards/${card.id}/edit`}
-                  className="button-link"
+                  className="btn btn-secondary btn-lg"
                 >
-                  <Button variant="secondary" size="lg" className="button">
-                    Edit Card
-                  </Button>
+                  Edit Card
                 </Link>
-                <Button onClick={() => handleRemoveCard(card)} variant="danger">
+                <button
+                  onClick={() => handleRemoveCard(card)}
+                  className="btn btn-danger"
+                >
                   Delete
-                </Button>
+                </button>
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
     </div>

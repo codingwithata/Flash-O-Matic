@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
 import { createCard } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory, useParams } from "react-router-dom";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import "./CreateCard.css";
 
@@ -45,54 +43,60 @@ function CreateCard() {
   return (
     <div className="create-card-container">
       <div className="cc-breadcrumb-main">
-        <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item href="/" className="breadcrumb-text">
-            Home
-          </Breadcrumb.Item>
-          <Breadcrumb.Item
-            href={`/decks/${deckId}`}
-            className="breadcrumb-text"
-          >
-            View Deck
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active className="breadcrumb-text">
-            Create Card
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="breadcrumb-item">
+              <a href={`/decks/${deckId}`}>View Deck</a>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Create Card
+            </li>
+          </ol>
+        </nav>
       </div>
 
       <div className="cc-form">
         <h2>Create Card</h2>
-        <Form onSubmit={handleOnSubmit}>
-          <Form.Group controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+        <form onSubmit={handleOnSubmit}>
+          <div className="mb-3">
+            <label htmlFor="front" className="form-label">
+              Name
+            </label>
+            <input
               type="text"
+              className="form-control"
+              id="front"
               placeholder="Enter front"
               value={front}
               onChange={handleFrontChange}
             />
-          </Form.Group>
-          <Form.Group controlId="formDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
+          </div>
+          <div className="mb-3">
+            <label htmlFor="back" className="form-label">
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="back"
               rows={3}
               placeholder="Enter Back information"
               value={back}
               onChange={handleBackChange}
             />
-          </Form.Group>
+          </div>
 
           <div className="cc-button-container">
-            <Button variant="secondary" className="cancel-button">
-              Cancel
-            </Button>
-            <Button type="submit" variant="primary" className="submit-button">
+            <button type="submit" className="btn btn-primary">
               Submit
-            </Button>
+            </button>
+            <button type="button" className="btn btn-secondary">
+              Cancel
+            </button>
           </div>
-        </Form>
+        </form>
       </div>
     </div>
   );

@@ -42,53 +42,63 @@ function CreateDeck() {
   return (
     <div className="create-deck-container">
       <div className="cd-breadcrumb-main">
-        <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item href="/" className="breadcrumb-text">
-            Home
-          </Breadcrumb.Item>
-          <Breadcrumb.Item
-            onClick={() => history.push("/")}
-            active
-            className="breadcrumb-text"
-          >
-            View Deck
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/" className="breadcrumb-text">
+                Home
+              </a>
+            </li>
+            <li
+              className="breadcrumb-item active breadcrumb-text"
+              aria-current="page"
+            >
+              View Deck
+            </li>
+          </ol>
+        </nav>
       </div>
 
       <div className="cd-form">
         <h2>Create Deck</h2>
-        <Form onSubmit={handleOnSubmit}>
-          <Form.Group controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+        <form onSubmit={handleOnSubmit}>
+          <div className="mb-3">
+            <label htmlFor="formName" className="form-label">
+              Name
+            </label>
+            <input
               type="text"
+              className="form-control"
+              id="formName"
               placeholder="Enter name"
               value={name}
               onChange={handleNameChange}
             />
-          </Form.Group>
-          <Form.Group controlId="formDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
+          </div>
+          <div className="mb-3">
+            <label htmlFor="formDescription" className="form-label">
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="formDescription"
               rows={3}
               placeholder="Enter description"
               value={description}
               onChange={handleDescriptionChange}
             />
-          </Form.Group>
+          </div>
 
           <div className="cd-button-container">
-            <Link to={`/`}>
-              <Button variant="primary">Cancel</Button>
-            </Link>
+            <a href="/" className="btn btn-primary">
+              Cancel
+            </a>
 
-            <Button type="submit" variant="primary" className="submit-button">
+            <button type="submit" className="btn btn-primary submit-button">
               Submit
-            </Button>
+            </button>
           </div>
-        </Form>
+        </form>
       </div>
     </div>
   );

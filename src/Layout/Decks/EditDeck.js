@@ -60,54 +60,64 @@ function EditDeck() {
   return (
     <div className="edit-deck-container">
       <div className="ed-breadcrumb-main">
-        <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item href="/" className="breadcrumb-text">
-            Home
-          </Breadcrumb.Item>
-          <Breadcrumb.Item
-            href={`/decks/${deckId}`}
-            className="breadcrumb-text"
-          >
-            View Deck
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active className="breadcrumb-text">
-            Edit Deck
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/" className="breadcrumb-text">
+                Home
+              </a>
+            </li>
+            <li className="breadcrumb-item">
+              <a href={`/decks/${deckId}`} className="breadcrumb-text">
+                View Deck
+              </a>
+            </li>
+            <li className="breadcrumb-item active breadcrumb-text">
+              Edit Deck
+            </li>
+          </ol>
+        </nav>
       </div>
 
       <div className="ed-form">
-        <h2>Create Deck</h2>
-        <Form onSubmit={handleOnSubmit}>
-          <Form.Group controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+        <h2>Edit Deck</h2>
+        <form onSubmit={handleOnSubmit}>
+          <div className="mb-3">
+            <label htmlFor="formName" className="form-label">
+              Name
+            </label>
+            <input
               type="text"
+              className="form-control"
+              id="formName"
               placeholder={deck.name}
               value={name}
               onChange={handleNameChange}
             />
-          </Form.Group>
-          <Form.Group controlId="formDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
+          </div>
+          <div className="mb-3">
+            <label htmlFor="formDescription" className="form-label">
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="formDescription"
               rows={3}
               placeholder={deck.description}
               value={description}
               onChange={handleDescriptionChange}
             />
-          </Form.Group>
-
-          <div className="ed-button-container ">
-            <Link to={`/`}>
-              <Button variant="primary">Cancel</Button>
-            </Link>
-            <Button type="submit" variant="primary" className="submit-button">
-              Submit
-            </Button>
           </div>
-        </Form>
+
+          <div className="ed-button-container">
+            <a href="/" className="btn btn-primary">
+              Cancel
+            </a>
+            <button type="submit" className="btn btn-primary submit-button">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

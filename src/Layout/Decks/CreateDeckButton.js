@@ -7,9 +7,9 @@ function CreateDeckButton() {
   return (
     <div className="button">
       <Link to="/decks/new" className="button-link">
-        <Button variant="secondary" size="lg" className="button">
+        <button type="submit" className="btn btn-secondary btn-lg button">
           Create Deck
-        </Button>
+        </button>
       </Link>
     </div>
   );

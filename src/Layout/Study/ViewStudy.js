@@ -46,46 +46,48 @@ function ViewStudy() {
   return (
     <div className="study-container">
       <div className="s-breadcrumb-main">
-        <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item href="/" className="breadcrumb-text">
-            Home
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active className="breadcrumb-text">
-            Study deck {deckId}
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/" className="breadcrumb-text">
+                Home
+              </a>
+            </li>
+            <li className="breadcrumb-item active breadcrumb-text">
+              Study deck {deckId}
+            </li>
+          </ol>
+        </nav>
       </div>
 
       <div className="studyCards">
         {cards.length > 2 ? (
-          <Card key={currentCard.id} className="mb-4">
-            <Card.Body>
-              <Card.Title>{currentCard.name}</Card.Title>
-              <Card.Text>
+          <div className="card mb-4">
+            <div className="card-body">
+              <h5 className="card-title">{currentCard.name}</h5>
+              <p className="card-text">
                 {showFront
                   ? `Front: ${currentCard.front}`
                   : `Back: ${currentCard.back}`}
-              </Card.Text>
+              </p>
               <div className="button-container">
-                <Button
+                <button
                   onClick={handleFlip}
-                  variant="secondary"
-                  size="lg"
-                  className="button"
+                  type="button"
+                  className="btn btn-secondary btn-lg button"
                 >
                   Flip
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={handleNext}
                   type="submit"
-                  variant="primary"
-                  className="submit-button"
+                  className="btn btn-primary btn-lg submit-button"
                 >
                   Next
-                </Button>
+                </button>
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         ) : (
           <div>
             <h1>React Router: Study</h1>
@@ -94,8 +96,8 @@ function ViewStudy() {
               You need at least 3 cards to study. There are {cards.length} in
               this deck{" "}
             </p>
-            <Link to={`/decks/${deckId}/cards`}>
-              <Button>Add Cards</Button>
+            <Link to={`/decks/${deckId}/cards`} className="btn btn-primary">
+              Add Cards
             </Link>
           </div>
         )}
