@@ -5,11 +5,13 @@ import "./CreateDeckButton.css";
 
 function CreateDeckButton() {
   return (
-    <Link to="/decks/new" className="button-link">
-      <Button variant="secondary" size="lg" className="button">
-        Create Deck
-      </Button>
-    </Link>
+    <div className="button">
+      <Link to="/decks/new" className="button-link">
+        <Button variant="secondary" size="lg" className="button">
+          Create Deck
+        </Button>
+      </Link>
+    </div>
   );
 }
 

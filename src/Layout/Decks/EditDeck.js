@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
+import "./EditDeck.css";
 function EditDeck() {
   const [deck, setDeck] = useState([]);
   const [name, setName] = useState("");
@@ -97,7 +98,8 @@ function EditDeck() {
               onChange={handleDescriptionChange}
             />
           </Form.Group>
-          <div className="ed-button-container">
+
+          <div className="ed-button-container ">
             <Link to={`/`}>
               <Button variant="primary">Cancel</Button>
             </Link>
