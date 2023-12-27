@@ -19,8 +19,6 @@ function Layout() {
       <div className="container">
         <Switch>
           <Route exact path="/">
-            <CreateDeckButton />
-            <br />
             <Decks />
           </Route>
           <Route exact path="/decks/new">

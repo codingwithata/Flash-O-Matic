@@ -1,0 +1,11 @@
+.main {
+    height: 100px;
+    width: 75%;
+    margin: auto;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.card-container {
+    width: 100%;
+}

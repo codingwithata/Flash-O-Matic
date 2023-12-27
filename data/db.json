@@ -4,26 +4,24 @@
       "name": "English",
       "description": "This is an english book",
       "id": 1
+    },
+    {
+      "name": "fdsa",
+      "description": "sdf",
+      "id": 2
+    },
+    {
+      "name": "sadf",
+      "description": "asdf",
+      "id": 3
     }
   ],
   "cards": [
     {
-      "front": "New ",
-      "back": "new",
+      "front": "fd",
+      "back": "fd",
       "deckId": 1,
-      "id": 4
-    },
-    {
-      "front": "Math",
-      "back": "New",
-      "deckId": 1,
-      "id": 6
-    },
-    {
-      "front": "This is the best this ever",
-      "back": "",
-      "deckId": 1,
-      "id": 7
+      "id": 1
     }
   ]
 }

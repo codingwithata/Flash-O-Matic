@@ -5,18 +5,18 @@ import Button from "react-bootstrap/Button";
 import "./Decks.css";
 import { deleteDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory } from "react-router-dom";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
+import CreateDeckButton from "./CreateDeckButton";
 function Decks() {
   const [decks, setDecks] = useState([]);
+  const [cards, setCards] = useState(0);
   const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const decksData = await listDecks();
-        setDecks(decksData || []); // Ensure decksData is an array or default to an empty array
+        setDecks(decksData || []);
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
@@ -43,47 +43,38 @@ function Decks() {
   };
 
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item active>Home</Breadcrumb.Item>
-      </Breadcrumb>
+    <div className="card-container">
+      <CreateDeckButton />
+      {decks.map((deck) => (
+        <div key={deck.id} className="mb-4 card">
+          <div className="cardTitle">
+            <p className="name">{deck.name}</p>
+            <p className="number">{deck.cards.length} Cards</p>
+          </div>
 
-      <div className="card-container">
-        {decks.map((deck) => (
-          <Card key={deck.id} className="mb-4">
-            <Card.Body>
-              <Card.Title>{deck.name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                Deck ID: {deck.id}
-              </Card.Subtitle>
-              <Card.Text>{deck.description}</Card.Text>
+          <p className="description">{deck.description}</p>
+          <div className="button-container">
+            <div className="button-group">
+              <Button
+                variant="primary"
+                className="mr-2"
+                onClick={() => handleViewDeck(deck)}
+              >
+                View
+              </Button>
+              <Link to={`/decks/${deck.id}/study`} className="button-link">
+                <Button class="btn btn-secondary">Study</Button>
+              </Link>
+            </div>
 
-              {/* Button Container */}
-              <div className="button-container">
-                <div className="button-group">
-                  {/* View and Study Buttons */}
-                  <Button
-                    variant="primary"
-                    className="mr-2"
-                    onClick={() => handleViewDeck(deck)}
-                  >
-                    View
-                  </Button>
-                  <Link to={`/decks/${deck.id}/study`} className="button-link">
-                    <Button variant="success">Study</Button>
-                  </Link>
-                </div>
-
-                {/* Trash Button */}
-                <Button variant="danger" onClick={() => handleDeleteDeck(deck)}>
-                  Delete
-                  <i className="fas fa-trash-alt"></i> {/* Icon here */}
-                </Button>
-              </div>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
+            {/* Trash Button */}
+            <Button variant="danger" onClick={() => handleDeleteDeck(deck)}>
+              Delete
+              <i className="fas fa-trash-alt"></i> {/* Icon here */}
+            </Button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

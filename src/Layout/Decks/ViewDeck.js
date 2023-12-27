@@ -7,6 +7,8 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
+import "./View.css";
+
 function ViewDeck() {
   const { deckId } = useParams();
   const [cards, setCards] = useState([]);
@@ -37,7 +39,7 @@ function ViewDeck() {
   };
 
   return (
-    <div>
+    <div className="main">
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item active>View Deck {deckId}</Breadcrumb.Item>
@@ -87,9 +89,12 @@ function ViewDeck() {
                     Edit Card
                   </Button>
                 </Link>
-                <Link to={`/`}>
-                  <Button variant="primary">Delete</Button>
-                </Link>
+                <Button
+                  onClick={() => handleRemoveCard(card)}
+                  variant="primary"
+                >
+                  Delete
+                </Button>
                 <Link
                   to={`/decks/${deckId}/cards`}
                   className="button-link"
