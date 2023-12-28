@@ -61,6 +61,12 @@ function EditDeck() {
     fetchData();
   }, [deckId, setDeck]);
 
+  useEffect(() => {
+    // Set the initial values of 'name' and 'description' when the 'deck' prop changes
+    setName(deck.name || "");
+    setDescription(deck.description || "");
+  }, [deck]);
+
   return (
     <div className="edit-deck-container">
       <div className="ed-breadcrumb-main">

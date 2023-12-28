@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { readDeck, deleteCard } from "../../utils/api/index";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -16,6 +14,7 @@ function ViewStudy() {
   const [showFront, setShowFront] = useState(true); // To toggle between front and back content
   const [showRestartPrompt, setShowRestartPrompt] = useState(false);
   const [insufficientCards, setInsufficientCards] = useState(false);
+  const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
     console.log(cardIndex);
@@ -26,6 +25,9 @@ function ViewStudy() {
       try {
         const deckData = await readDeck(deckId);
         setDecks(deckData || []);
+        console.log(deckData);
+        setCards(deckData.cards);
+        console.log(deckData);
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
@@ -33,32 +35,24 @@ function ViewStudy() {
     fetchData();
   }, [deckId]);
 
-  useEffect(() => {
-    const abort = new AbortController();
-    const signal = abort.signal;
+  // useEffect(() => {
+  //   const fetchCards = async () => {
+  //     try {
+  //       const cards = await fetch(
+  //         `http://localhost:8080/cards?deckId=${deckId}`
+  //       );
+  //       const response = await cards.json();
+  //       setCards(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    const fetchCards = async () => {
-      try {
-        const cards = await fetch(
-          `http://localhost:8080/cards?deckId=${deckId}`,
-          { signal: signal } // Fixed the syntax here
-        );
-        const response = await cards.json();
-        setCards(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchCards();
-
-    return () => {
-      console.log("Aborted");
-      abort.abort();
-    };
-  }, [deckId]);
+  //   fetchCards();
+  // }, [deckId]);
 
   const handleFlip = () => {
+    setNextButton(true);
     setShowFront((prevShowFront) => !prevShowFront);
   };
 
@@ -80,34 +74,35 @@ function ViewStudy() {
   return (
     <div className="study-container">
       <div className="s-breadcrumb-main">
-        <Breadcrumb>
-          <Breadcrumb.Item>
-            <Link to="/" className="breadcrumb-text">
-              Home
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item className="breadcrumb-text">
-            <Link to={`/decks/${deckId}`} className="breadcrumb-text">
-              {decks.name}
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active className="breadcrumb-text">
-            Study
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/" className="breadcrumb-text">
+                Home
+              </Link>
+            </li>
+            <li className="breadcrumb-item">
+              <Link to={`/decks/${deckId}`} className="breadcrumb-text">
+                {decks.name}
+              </Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Study
+            </li>
+          </ol>
+        </nav>
       </div>
-      <h1 className="card-title">Study:{decks.name}</h1>
+
+      <h1 className="card-title">{decks.name}: Study</h1>
       <div className="studyCards">
         {cards.length > 2 ? (
           <div className="card mb-4">
+            <p className="card-index-text">
+              Card {cardIndex + 1} of {cards.length}
+            </p>
             <div className="card-body">
-              <p className="card-index-text">
-                Card {cardIndex + 1} of {cards.length}
-              </p>
               <p className="card-text">
-                {showFront
-                  ? `Front: ${currentCard.front}`
-                  : `Back: ${currentCard.back}`}
+                {showFront ? `${currentCard.front}` : `${currentCard.back}`}
               </p>
               <div className="button-container">
                 <button
@@ -115,15 +110,17 @@ function ViewStudy() {
                   type="button"
                   className="btn btn-secondary btn-lg button"
                 >
-                  Flip
+                  flip
                 </button>
-                <button
-                  onClick={handleNext}
-                  type="submit"
-                  className="btn btn-primary btn-lg submit-button"
-                >
-                  Next
-                </button>
+                {nextButton && (
+                  <button
+                    onClick={handleNext}
+                    type="submit"
+                    className="btn btn-primary btn-lg submit-button"
+                  >
+                    next
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -134,7 +131,7 @@ function ViewStudy() {
               You need at least 3 cards to study. There are {cards.length} in
               this deck{" "}
             </p>
-            <Link to={`/decks/${deckId}/cards`} className="btn btn-primary">
+            <Link to={`/decks/${deckId}/cards/new`} className="btn btn-primary">
               Add Cards
             </Link>
           </div>

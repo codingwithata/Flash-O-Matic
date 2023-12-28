@@ -18,6 +18,8 @@ function ViewDeck() {
       try {
         const deckData = await readDeck(deckId);
         setDecks(deckData);
+        setCards(deckData.cards);
+        console.log(deckData);
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
@@ -25,30 +27,30 @@ function ViewDeck() {
     fetchData();
   }, [deckId]);
 
-  useEffect(() => {
-    const abort = new AbortController();
-    const signal = abort.signal;
+  // useEffect(() => {
+  //   const abort = new AbortController();
+  //   const signal = abort.signal;
 
-    const fetchCards = async () => {
-      try {
-        const cards = await fetch(
-          `http://localhost:8080/cards?deckId=${deckId}`,
-          { signal: signal } // Fixed the syntax here
-        );
-        const response = await cards.json();
-        setCards(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  //   const fetchCards = async () => {
+  //     try {
+  //       const cards = await fetch(
+  //         `http://localhost:8080/cards?deckId=${deckId}`,
+  //         { signal: signal } // Fixed the syntax here
+  //       );
+  //       const response = await cards.json();
+  //       setCards(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchCards();
+  //   fetchCards();
 
-    return () => {
-      console.log("Aborted");
-      abort.abort();
-    };
-  }, [deckId]);
+  //   return () => {
+  //     console.log("Aborted");
+  //     abort.abort();
+  //   };
+  // }, [deckId]);
 
   const handleRemoveCard = async (selectedCard) => {
     try {
@@ -60,10 +62,9 @@ function ViewDeck() {
       console.log(error);
     }
   };
-
-  const handleDeleteDeck = async (deckId) => {
+  const handleDeleteDeck = async () => {
     try {
-      await deleteDeck(deckId);
+      await deleteDeck(deckId); // Pass the deckId parameter
       history.push(`/`);
     } catch (error) {
       console.log(error);
@@ -90,9 +91,7 @@ function ViewDeck() {
         <div className="card" style={{ border: "none" }}>
           <div className="card-body">
             <h5 className="card-title">{decks.name}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">
-              Deck ID: {decks.id}
-            </h6>
+
             <p className="card-text">{decks.description}</p>
           </div>
 
@@ -110,7 +109,7 @@ function ViewDeck() {
               Study
             </Link>
             <Link
-              to={`/decks/${deckId}/cards`}
+              to={`/decks/${deckId}/cards/new`}
               className="btn btn-primary btn-lg"
             >
               Add Cards
@@ -127,12 +126,10 @@ function ViewDeck() {
         {cards.map((card) => (
           <div key={card.id} className="card mb-4">
             <div className="card-body">
-              <h5 className="card-title">{card.name}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">
-                Card ID: {card.id}
-              </h6>
-              <p className="card-text">Front: {card.front}</p>
-              <p className="card-text">Back: {card.back}</p>
+              <div className="cardFlex">
+                <h2>{card.front}</h2>
+                <h2>{card.back}</h2>
+              </div>
 
               <div className="vd-card-button-container">
                 <Link

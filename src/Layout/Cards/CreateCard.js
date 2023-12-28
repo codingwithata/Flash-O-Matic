@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { createCard } from "../../utils/api/index"; // Adjust the path accordingly
+import React, { useState, useEffect } from "react";
+import { createCard, readDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory, useParams } from "react-router-dom";
 
 import "./CreateCard.css";
@@ -7,6 +7,7 @@ import "./CreateCard.css";
 function CreateCard() {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
+  const [decks, setDecks] = useState([]);
 
   const history = useHistory();
 
@@ -40,6 +41,18 @@ function CreateCard() {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const deckData = await readDeck(deckId);
+        setDecks(deckData);
+      } catch (error) {
+        console.error("Error fetching decks:", error);
+      }
+    };
+    fetchData();
+  }, [deckId]);
+
   return (
     <div className="create-card-container">
       <div className="cc-breadcrumb-main">
@@ -49,40 +62,40 @@ function CreateCard() {
               <a href="/">Home</a>
             </li>
             <li className="breadcrumb-item">
-              <a href={`/decks/${deckId}`}>View Deck</a>
+              <a href={`/decks/${deckId}`}>{decks.name}</a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Create Card
+              Add Card
             </li>
           </ol>
         </nav>
       </div>
 
       <div className="cc-form">
-        <h2>Create Card</h2>
+        <h2>{decks.name}: Add Card</h2>
         <form onSubmit={handleOnSubmit}>
           <div className="mb-3">
             <label htmlFor="front" className="form-label">
-              Name
+              Front
             </label>
-            <input
+            <textarea
               type="text"
               className="form-control"
               id="front"
-              placeholder="Enter front"
+              placeholder="Front side of card"
               value={front}
               onChange={handleFrontChange}
             />
           </div>
           <div className="mb-3">
             <label htmlFor="back" className="form-label">
-              Description
+              Back
             </label>
             <textarea
               className="form-control"
               id="back"
               rows={3}
-              placeholder="Enter Back information"
+              placeholder="Back side of card"
               value={back}
               onChange={handleBackChange}
             />
@@ -90,10 +103,10 @@ function CreateCard() {
 
           <div className="cc-button-container">
             <button type="submit" className="btn btn-primary">
-              Submit
+              Done
             </button>
             <button type="button" className="btn btn-secondary">
-              Cancel
+              Save
             </button>
           </div>
         </form>

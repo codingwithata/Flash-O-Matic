@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { updateCard } from "../../utils/api";
+import { updateCard, readCard } from "../../utils/api";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "./EditCard.css";
 
 function EditCard() {
-  const [front, setFront] = useState("");
-  const [back, setBack] = useState("");
+  const [card, setCard] = useState([]);
+
+  const [front, setFront] = useState(card.front || "");
+  const [back, setBack] = useState(card.back || "");
 
   const history = useHistory();
   const { deckId, cardId } = useParams();
@@ -22,6 +24,21 @@ function EditCard() {
   useEffect(() => {
     console.log(front, back);
   });
+
+  useEffect(() => {
+    const fetchCard = async () => {
+      try {
+        const card = await readCard(cardId);
+        setFront(card.front);
+        setBack(card.back);
+        console.log(card);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCard();
+  }, [cardId]);
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -79,6 +96,7 @@ function EditCard() {
               className="form-control"
               id="front"
               value={front}
+              placeholder={front}
               onChange={handleFrontChange}
             />
           </div>
@@ -91,6 +109,7 @@ function EditCard() {
               id="back"
               rows={3}
               value={back}
+              placeholder={back}
               onChange={handleBackChange}
             />
           </div>

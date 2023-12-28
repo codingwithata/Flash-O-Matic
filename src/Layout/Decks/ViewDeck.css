@@ -8,7 +8,6 @@
 
 
 .s-breadcrumb-main {
-    /* Optional: Adjust styling for the breadcrumb */
     padding: 10px;
     width: 100%;
 }
@@ -18,7 +17,6 @@
     display: flex;
     justify-content: left;
     gap: 3px;
-    /* Adjust the gap size as needed */
 }
 
 .vd-deck-button-container> :last-child {
@@ -26,7 +24,6 @@
 }
 
 .s-breadcrumb-main {
-    /* Optional: Adjust styling for the breadcrumb */
     padding: 10px;
     width: 100%;
 }
@@ -63,4 +60,11 @@
 
 .vd-button-container> :last-child {
     margin-left: auto;
+}
+
+.cardFlex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
 }

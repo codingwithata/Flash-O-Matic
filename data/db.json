@@ -1,11 +1,6 @@
 {
   "decks": [
     {
-      "id": 2,
-      "name": "Rendering in react",
-      "description": "Rendering in react"
-    },
-    {
       "id": 3,
       "name": "Mock Deck 3",
       "description": "MD"
@@ -24,22 +19,16 @@
       "id": 3
     },
     {
-      "id": 4,
-      "deckId": "2",
-      "front": "adfs",
-      "back": "adsf"
+      "front": "asdf",
+      "back": "fdsa",
+      "deckId": 3,
+      "id": 5
     },
     {
-      "id": 5,
-      "deckId": "2",
-      "front": "dsfg",
-      "back": "dgsf"
-    },
-    {
-      "id": 6,
-      "deckId": "2",
-      "front": "dfgh",
-      "back": "dfgh"
+      "front": "fd",
+      "back": "df",
+      "deckId": 3,
+      "id": 6
     }
   ]
 }

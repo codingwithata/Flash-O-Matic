@@ -6,25 +6,21 @@
 }
 
 .ed-breadcrumb-main {
-    /* Optional: Adjust styling for the breadcrumb */
     padding: 10px;
     width: 100%;
 }
 
 .ed-breadcrumb {
-    /* Optional: Adjust styling for the breadcrumb */
     padding: 10px;
     width: 100%;
 }
 
 .ed-form {
     flex: 1;
-    /* This allows the form to take up remaining vertical space */
     padding: 20px;
     width: 100%;
     align-items: left;
 
-    /* Set background color for the form */
 }
 
 .ed-button-container {

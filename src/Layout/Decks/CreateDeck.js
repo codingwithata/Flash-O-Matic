@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createDeck } from "../../utils/api/index";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom";
 
 import "./CreateDeck.css";
@@ -41,16 +40,18 @@ function CreateDeck() {
   return (
     <div className="create-deck-container">
       <div className="cd-breadcrumb-main">
-        <Breadcrumb>
-          <Breadcrumb.Item>
-            <Link to="/" className="breadcrumb-text">
-              Home
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active className="breadcrumb-text">
-            Create Deck
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/" className="breadcrumb-text">
+                Home
+              </Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Create Deck
+            </li>
+          </ol>
+        </nav>
       </div>
 
       <div className="cd-form">
