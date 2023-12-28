@@ -17,15 +17,38 @@ function ViewDeck() {
     const fetchData = async () => {
       try {
         const deckData = await readDeck(deckId);
-        setDecks(deckData || []);
-        setCards(deckData.cards || []);
-        console.log(deckData.cards);
+        setDecks(deckData);
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
     };
     fetchData();
   }, [deckId]);
+  retrivi;
+  useEffect(() => {
+    const abort = new AbortController();
+    const signal = abort.signal;
+
+    const fetchCards = async () => {
+      try {
+        const cards = await fetch(
+          `http://localhost:8080/cards?deckId=${deckId}`,
+          { signal: signal } // Fixed the syntax here
+        );
+        const response = await cards.json();
+        setCards(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCards();
+
+    return () => {
+      console.log("Aborted");
+      abort.abort(); // Invoke the abort function
+    };
+  }, [deckId]); // Adjust the dependencies here
 
   const handleRemoveCard = async (selectedCard) => {
     try {

@@ -13,7 +13,16 @@ function EditDeck() {
 
   const history = useHistory();
 
-  const { deckId } = useParams();
+  const { deckId, cardId } = useParams();
+
+  const fetchData = async () => {
+    try {
+      const fetchedDeck = await readDeck(deckId);
+      setDeck(fetchedDeck);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -28,32 +37,21 @@ function EditDeck() {
 
     try {
       const newDeck = {
-        id: deckId,
         name,
         description,
+        deckId: deckId,
+        id: cardId,
       };
 
       await updateDeck(newDeck);
-
-      history.push("/");
-
-      setName("");
-      setDescription("");
+      fetchData();
+      // history.push("/");
     } catch (error) {
       console.error("Error creating deck:", error);
     }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const deck = await readDeck(deckId);
-        setDeck(deck || []);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchData();
   }, [deckId, setDeck]);
 

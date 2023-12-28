@@ -29,6 +29,7 @@ function EditCard() {
     try {
       const cardToUpdate = {
         id: cardId,
+        deckId: deckId,
         front,
         back,
       };
@@ -36,7 +37,6 @@ function EditCard() {
       await updateCard(cardToUpdate);
 
       history.push(`/decks/${deckId}`);
-
       setFront("");
       setBack("");
     } catch (error) {
