@@ -1,118 +1,45 @@
 {
   "decks": [
     {
-      "name": "Testing one",
-      "description": "Testing one",
-      "id": 1
+      "id": 2,
+      "name": "Rendering in react",
+      "description": "Rendering in react"
+    },
+    {
+      "id": 3,
+      "name": "Mock Deck 3",
+      "description": "MD"
+    },
+    {
+      "name": "Name",
+      "description": "Name",
+      "id": 4
     }
   ],
   "cards": [
     {
-      "id": 2,
-      "front": "sadf",
-      "back": "safd"
-    },
-    {
-      "id": 3,
-      "front": "fd",
-      "back": "fd"
+      "front": "What has ears but cannot hear?",
+      "back": "A cornfield.",
+      "deckId": 3,
+      "id": 3
     },
     {
       "id": 4,
-      "front": "",
-      "back": "cds"
+      "deckId": "2",
+      "front": "adfs",
+      "back": "adsf"
     },
     {
       "id": 5,
-      "front": "ff",
-      "back": "ff"
+      "deckId": "2",
+      "front": "dsfg",
+      "back": "dgsf"
     },
     {
       "id": 6,
-      "front": "a",
-      "back": "a"
-    },
-    {
-      "id": 7,
-      "front": "saf",
-      "back": "fdsda"
-    },
-    {
-      "id": 8,
-      "front": "a",
-      "back": "a"
-    },
-    {
-      "id": 9,
-      "front": "a",
-      "back": "a"
-    },
-    {
-      "id": 10,
-      "front": "safd",
-      "back": "asf"
-    },
-    {
-      "id": 11,
-      "front": "f",
-      "back": "d"
-    },
-    {
-      "id": 12,
-      "front": "f",
-      "back": "f"
-    },
-    {
-      "id": 13,
-      "front": "a",
-      "back": "a"
-    },
-    {
-      "id": 14,
-      "front": "fd",
-      "back": "dfd"
-    },
-    {
-      "id": 15,
-      "front": "s",
-      "back": "s"
-    },
-    {
-      "id": 16,
-      "front": "f",
-      "back": "f"
-    },
-    {
-      "id": 17,
-      "front": "new",
-      "back": "new"
-    },
-    {
-      "id": 18,
-      "front": "f",
-      "back": "f"
-    },
-    {
-      "id": 19,
-      "front": "asdf",
-      "back": "asdf"
-    },
-    {
-      "id": 20,
-      "front": "asdf",
-      "back": "asdf"
-    },
-    {
-      "id": 21,
-      "deckId": "1",
-      "front": "f",
-      "back": "f"
-    },
-    {
-      "id": 22,
-      "deckId": "1",
-      "front": "as",
-      "back": "as"
+      "deckId": "2",
+      "front": "dfgh",
+      "back": "dfgh"
     }
   ]
 }

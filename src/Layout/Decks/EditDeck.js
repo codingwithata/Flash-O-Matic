@@ -13,16 +13,7 @@ function EditDeck() {
 
   const history = useHistory();
 
-  const { deckId, cardId } = useParams();
-
-  const fetchData = async () => {
-    try {
-      const fetchedDeck = await readDeck(deckId);
-      setDeck(fetchedDeck);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { deckId } = useParams();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -34,24 +25,39 @@ function EditDeck() {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+    if (!name.trim() || !description.trim()) {
+      alert("Please enter both a deck name and description.");
+      return;
+    }
 
     try {
       const newDeck = {
+        id: deckId,
         name,
         description,
-        deckId: deckId,
-        id: cardId,
       };
 
       await updateDeck(newDeck);
-      fetchData();
-      // history.push("/");
+
+      history.push(`/decks/${deckId}`);
+
+      setName("");
+      setDescription("");
     } catch (error) {
       console.error("Error creating deck:", error);
     }
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const deck = await readDeck(deckId);
+        setDeck(deck || []);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchData();
   }, [deckId, setDeck]);
 
@@ -102,7 +108,7 @@ function EditDeck() {
               id="formDescription"
               rows={3}
               placeholder={deck.description}
-              value={description}
+              value={description || ""}
               onChange={handleDescriptionChange}
             />
           </div>

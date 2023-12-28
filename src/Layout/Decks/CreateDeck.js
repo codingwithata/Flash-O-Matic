@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { createDeck } from "../../utils/api/index"; // Adjust the path accordingly
 import { useHistory } from "react-router-dom";
+import { createDeck } from "../../utils/api/index";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 import "./CreateDeck.css";
 
@@ -42,21 +41,16 @@ function CreateDeck() {
   return (
     <div className="create-deck-container">
       <div className="cd-breadcrumb-main">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="/" className="breadcrumb-text">
-                Home
-              </a>
-            </li>
-            <li
-              className="breadcrumb-item active breadcrumb-text"
-              aria-current="page"
-            >
-              View Deck
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb>
+          <Breadcrumb.Item>
+            <Link to="/" className="breadcrumb-text">
+              Home
+            </Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active className="breadcrumb-text">
+            Create Deck
+          </Breadcrumb.Item>
+        </Breadcrumb>
       </div>
 
       <div className="cd-form">
@@ -70,7 +64,7 @@ function CreateDeck() {
               type="text"
               className="form-control"
               id="formName"
-              placeholder="Enter name"
+              placeholder="Deck Name"
               value={name}
               onChange={handleNameChange}
             />
@@ -83,16 +77,16 @@ function CreateDeck() {
               className="form-control"
               id="formDescription"
               rows={3}
-              placeholder="Enter description"
+              placeholder="Brief description of the deck"
               value={description}
               onChange={handleDescriptionChange}
             />
           </div>
 
           <div className="cd-button-container">
-            <a href="/" className="btn btn-primary">
+            <Link to="/" className="btn btn-secondary">
               Cancel
-            </a>
+            </Link>
 
             <button type="submit" className="btn btn-primary submit-button">
               Submit

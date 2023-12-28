@@ -29,6 +29,14 @@ function Decks() {
   }, []);
 
   const handleDeleteDeck = async (selectDeck) => {
+    const isConfirmed = window.confirm(
+      `Delete this deck?\n\nYou will not be able to recover it.`
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       await deleteDeck(selectDeck.id);
 
@@ -52,7 +60,7 @@ function Decks() {
         <div key={deck.id} className="mb-4 card">
           <div className="cardTitle">
             <p className="name">{deck.name}</p>
-            <p className="number">{deck.cards.length} Cards</p>
+            <p className="number">{deck.cards.length} cards</p>
           </div>
 
           <p className="description">{deck.description}</p>

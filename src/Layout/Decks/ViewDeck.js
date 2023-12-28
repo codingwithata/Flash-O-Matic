@@ -24,7 +24,7 @@ function ViewDeck() {
     };
     fetchData();
   }, [deckId]);
-  retrivi;
+
   useEffect(() => {
     const abort = new AbortController();
     const signal = abort.signal;
@@ -46,9 +46,9 @@ function ViewDeck() {
 
     return () => {
       console.log("Aborted");
-      abort.abort(); // Invoke the abort function
+      abort.abort();
     };
-  }, [deckId]); // Adjust the dependencies here
+  }, [deckId]);
 
   const handleRemoveCard = async (selectedCard) => {
     try {
@@ -81,7 +81,7 @@ function ViewDeck() {
               </a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              View Deck {deckId}
+              {decks.name}
             </li>
           </ol>
         </nav>
@@ -101,7 +101,7 @@ function ViewDeck() {
               to={`/decks/${deckId}/edit`}
               className="btn btn-secondary btn-lg"
             >
-              Edit Deck
+              Edit
             </Link>
             <Link
               to={`/decks/${deckId}/study`}

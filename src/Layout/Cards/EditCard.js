@@ -26,6 +26,11 @@ function EditCard() {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
+    if (!front.trim() || !back.trim()) {
+      alert("Please enter both front and back .");
+      return;
+    }
+
     try {
       const cardToUpdate = {
         id: cardId,

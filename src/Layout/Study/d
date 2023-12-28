@@ -1,25 +1,19 @@
-// EditDeck.js
+// Import necessary dependencies
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { readDeck, deleteCard } from "../../utils/api/index";
+import { useParams, Link, useHistory } from "react-router-dom";
+import { readDeck } from "../../utils/api/index";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ViewStudy() {
+  const history = useHistory();
   const { deckId } = useParams();
   const [cards, setCards] = useState([]);
   const [decks, setDecks] = useState([]);
-  const [cardIndex, setCardIndex] = useState(0); // To keep track of the current card index
-
-  const [showFront, setShowFront] = useState(true); // To toggle between front and back content
+  const [cardIndex, setCardIndex] = useState(0);
+  const [showFront, setShowFront] = useState(true);
   const [showRestartPrompt, setShowRestartPrompt] = useState(false);
   const [insufficientCards, setInsufficientCards] = useState(false);
-
-  useEffect(() => {
-    console.log(cardIndex);
-  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,10 +35,12 @@ function ViewStudy() {
       try {
         const cards = await fetch(
           `http://localhost:8080/cards?deckId=${deckId}`,
-          { signal: signal } // Fixed the syntax here
+          { signal: signal }
         );
         const response = await cards.json();
         setCards(response);
+        console.log(cards);
+        setInsufficientCards(response.length <= 2);
       } catch (error) {
         console.log(error);
       }
@@ -75,6 +71,11 @@ function ViewStudy() {
     setCardIndex(0);
     setShowRestartPrompt(false);
   };
+
+  const handleAddCards = () => {
+    history.push(`/decks/${deckId}/cards`);
+  };
+
   const currentCard = cards[cardIndex];
 
   return (
@@ -96,18 +97,27 @@ function ViewStudy() {
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>
-      <h1 className="card-title">Study:{decks.name}</h1>
+      <h1 className="card-title">Study: {decks.name}</h1>
       <div className="studyCards">
-        {cards.length > 2 ? (
+        {insufficientCards ? (
+          <div>
+            <h2>Not enough cards</h2>
+            <p>
+              You need at least 3 cards to study. There are {cards.length} in
+              this deck{" "}
+            </p>
+            <Button onClick={handleAddCards} variant="primary">
+              Add Cards
+            </Button>
+          </div>
+        ) : (
           <div className="card mb-4">
             <div className="card-body">
               <p className="card-index-text">
                 Card {cardIndex + 1} of {cards.length}
               </p>
               <p className="card-text">
-                {showFront
-                  ? `Front: ${currentCard.front}`
-                  : `Back: ${currentCard.back}`}
+                {showFront ? `Front: ${cards.front}` : `Back: ${cards.back}`}
               </p>
               <div className="button-container">
                 <button
@@ -126,17 +136,6 @@ function ViewStudy() {
                 </button>
               </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            <h2>Not enough cards</h2>
-            <p>
-              You need at least 3 cards to study. There are {cards.length} in
-              this deck{" "}
-            </p>
-            <Link to={`/decks/${deckId}/cards`} className="btn btn-primary">
-              Add Cards
-            </Link>
           </div>
         )}
       </div>
