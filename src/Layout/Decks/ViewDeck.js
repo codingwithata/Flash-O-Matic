@@ -1,7 +1,12 @@
 // EditDeck.js
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { readDeck, deleteCard, deleteDeck } from "../../utils/api/index";
+import {
+  readDeck,
+  deleteCard,
+  deleteDeck,
+  listCards,
+} from "../../utils/api/index";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import "./ViewDeck.css";
@@ -17,40 +22,28 @@ function ViewDeck() {
     const fetchData = async () => {
       try {
         const deckData = await readDeck(deckId);
+
         setDecks(deckData);
-        setCards(deckData.cards);
         console.log(deckData);
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
     };
+
+    const fetchCardData = async () => {
+      try {
+        const cardData = await listCards(deckId);
+
+        setCards(cardData);
+        console.log(cardData);
+      } catch (error) {
+        console.error("Error fetching decks:", error);
+      }
+    };
+
+    fetchCardData();
     fetchData();
   }, [deckId]);
-
-  // useEffect(() => {
-  //   const abort = new AbortController();
-  //   const signal = abort.signal;
-
-  //   const fetchCards = async () => {
-  //     try {
-  //       const cards = await fetch(
-  //         `http://localhost:8080/cards?deckId=${deckId}`,
-  //         { signal: signal } // Fixed the syntax here
-  //       );
-  //       const response = await cards.json();
-  //       setCards(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchCards();
-
-  //   return () => {
-  //     console.log("Aborted");
-  //     abort.abort();
-  //   };
-  // }, [deckId]);
 
   const handleRemoveCard = async (selectedCard) => {
     try {

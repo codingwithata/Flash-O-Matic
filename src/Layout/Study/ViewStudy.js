@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { readDeck, deleteCard } from "../../utils/api/index";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ViewStudy() {

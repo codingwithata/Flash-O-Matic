@@ -1,34 +1,144 @@
 {
   "decks": [
     {
-      "id": 3,
-      "name": "Mock Deck 3",
-      "description": "MD"
-    },
-    {
-      "name": "Name",
-      "description": "Name",
-      "id": 4
+      "id": 1,
+      "name": "Math",
+      "description": "This will be for multiplication and division"
     }
   ],
   "cards": [
     {
-      "front": "What has ears but cannot hear?",
-      "back": "A cornfield.",
-      "deckId": 3,
+      "front": "asdfasf",
+      "back": "dsadfas",
+      "deckId": "9",
+      "id": 1
+    },
+    {
+      "front": "fdf",
+      "back": "asfd",
+      "id": 2
+    },
+    {
+      "front": "b",
+      "back": "b",
       "id": 3
     },
     {
-      "front": "asdf",
-      "back": "fdsa",
-      "deckId": 3,
+      "front": "fdsa",
+      "back": "asdf",
+      "id": 4
+    },
+    {
+      "front": "sfda",
+      "back": "asdf",
       "id": 5
     },
     {
-      "front": "fd",
-      "back": "df",
-      "deckId": 3,
+      "front": "f",
+      "back": "f",
       "id": 6
+    },
+    {
+      "front": "a",
+      "back": "a",
+      "id": 7
+    },
+    {
+      "front": "af",
+      "back": "af",
+      "id": 8
+    },
+    {
+      "front": "asfd",
+      "back": "",
+      "id": 9
+    },
+    {
+      "front": "a",
+      "back": "a",
+      "id": 10
+    },
+    {
+      "front": "a",
+      "back": "a",
+      "id": 11
+    },
+    {
+      "front": "d",
+      "back": "d",
+      "id": 12
+    },
+    {
+      "front": "a",
+      "back": "a",
+      "id": 13
+    },
+    {
+      "front": "aaa",
+      "back": "a",
+      "id": 14
+    },
+    {
+      "front": "fwsfdasdaf",
+      "back": "asd",
+      "id": 15
+    },
+    {
+      "front": "sfadsfad",
+      "back": "safdsafd",
+      "id": 16
+    },
+    {
+      "front": "a",
+      "back": "a",
+      "id": 17
+    },
+    {
+      "front": "asfd",
+      "back": "aasfd",
+      "id": 18
+    },
+    {
+      "front": "sdaf",
+      "back": "safd",
+      "id": 19
+    },
+    {
+      "front": "sadf",
+      "back": "asdf",
+      "id": 20
+    },
+    {
+      "front": "safd",
+      "back": "saf",
+      "id": 21
+    },
+    {
+      "front": "sadf",
+      "back": "",
+      "id": 22
+    },
+    {
+      "front": "asdf",
+      "back": "sadf",
+      "id": 23
+    },
+    {
+      "front": "asdf",
+      "back": "saf",
+      "id": 24
+    },
+    {
+      "front": "new",
+      "back": "one",
+      "deckId": "1",
+      "id": 25
+    },
+    {
+      "front": "sadf",
+      "back": "asfd",
+      "deckId": 1,
+      "id": 26
     }
   ]
 }
