@@ -3,8 +3,15 @@
     {
       "id": 1,
       "name": "Math",
-      "description": "This will be for multiplication and division"
+      "description": "This deck will be used to help with Algebra"
     }
   ],
-  "cards": []
+  "cards": [
+    {
+      "front": "What is multiplication?",
+      "back": "Is the process of calculating the product of two or more numbers. ",
+      "deckId": 1,
+      "id": 1
+    }
+  ]
 }
